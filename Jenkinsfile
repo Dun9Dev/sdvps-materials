@@ -3,17 +3,25 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/Dun9Dev/sdvps-materials.git', branch: 'main'
+                git url: 'https://github.com/ваш-логин/название-репозитория.git', branch: 'main'
             }
         }
-        stage('Run Tests') {
+        stage('Build Go Binary') {
             steps {
-                sh 'go test .'
+                sh 'go build -o app main.go'
             }
         }
-        stage('Build Docker Image') {
+        stage('Upload to Nexus') {
             steps {
-                sh 'docker build .'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                        sh """
+                            curl -u \$NEXUS_USER:\$NEXUS_PASSWORD \
+                            --upload-file app \
+                            http://ваш-ip-адрес:8081/repository/имя-репозитория/app
+                        """
+                    }
+                }
             }
         }
     }
