@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/ваш-логин/название-репозитория.git', branch: 'main'
+                git url: 'https://github.com/Dun9Dev/sdvps-materials.git', branch: 'main'
             }
         }
         stage('Build Go Binary') {
@@ -18,7 +18,7 @@ pipeline {
                         sh """
                             curl -u \$NEXUS_USER:\$NEXUS_PASSWORD \
                             --upload-file app \
-                            http://ваш-ip-адрес:8081/repository/имя-репозитория/app
+                            http://192.168.3.160:8082/repository/my-repo/
                         """
                     }
                 }
