@@ -14,7 +14,7 @@ pipeline {
         stage('Upload to Nexus') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    withCredentials([usernamePassword(admin: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                         sh """
                             curl -u \$NEXUS_USER:\$NEXUS_PASSWORD \
                             --upload-file app \
