@@ -14,11 +14,15 @@ pipeline {
         stage('Upload to Nexus') {
             steps {
                 script {
-                    withCredentials([usernamePassword(admin: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'admin', 
+                        usernameVariable: 'NEXUS_USER',
+                        passwordVariable: 'NEXUS_PASSWORD'
+                    )]) {
                         sh """
                             curl -u \$NEXUS_USER:\$NEXUS_PASSWORD \
                             --upload-file app \
-                            http://192.168.3.160:8082/repository/my-repo/
+                            http://ваш-ip-адрес:8081/repository/имя-репозитория/app
                         """
                     }
                 }
