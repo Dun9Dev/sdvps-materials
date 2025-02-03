@@ -22,7 +22,7 @@ pipeline {
                         sh """
                             curl -u \$NEXUS_USER:\$NEXUS_PASSWORD \
                             --upload-file app \
-                            http://ваш-ip-адрес:8082/repository/имя-репозитория/app
+                            http://192.168.3.160:8082/repository/my-repo/app
                         """
                     }
                 }
