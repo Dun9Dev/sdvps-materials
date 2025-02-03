@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/ваш-логин/название-репозитория.git', branch: 'main'
+                git url: 'https://github.com/Dun9Dev/sdvps-materials.git', branch: 'main'
             }
         }
         stage('Run Tests') {
